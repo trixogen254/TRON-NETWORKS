@@ -33,7 +33,7 @@ const Packages = () => {
         {packages.map(pkg => (
           <div key={pkg.id} className="package-card">
             <h3>{pkg.name}</h3>
-            <p>Ksh {pkg.price}</p>
+            <p>Ksh. {pkg.price}</p>
             <p>{pkg.description}</p>
             <button onClick={() => handlePurchase(pkg.id)}>Buy Now</button>
           </div>
