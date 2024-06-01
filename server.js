@@ -1,0 +1,131 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const mysql = require('mysql2');
+const bcrypt = require('bcrypt');
+const MikroNode = require('mikronode');
+const path = require('path');
+const cors = require('cors');
+
+const app = express();
+app.use(bodyParser.json());
+app.use(cors()); // Add this line to enable CORS
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'tron_networks_frontend/build')));
+
+// Database connection
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'Trixogen@24',
+    database: 'tron_networks'
+});
+
+db.connect((err) => {
+    if (err) {
+        console.error('Error connecting to the database:', err);
+        return;
+    }
+    console.log('Connected to the MySQL database.');
+});
+
+// User registration
+app.post('/register', async (req, res) => {
+  const { username, password, email, phone } = req.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const sql = 'INSERT INTO users (username, password, email, phone) VALUES (?, ?, ?, ?)';
+  db.query(sql, [username, hashedPassword, email, phone], (err, result) => {
+    if (err) return res.status(500).send(err);
+    res.send('User registered successfully');
+  });
+});
+
+// User login
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  const sql = 'SELECT * FROM users WHERE username = ?';
+  db.query(sql, [username], async (err, result) => {
+    if (err) return res.status(500).send(err);
+    if (result.length === 0) return res.status(404).send('User not found');
+    
+    const user = result[0];
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(401).send('Invalid credentials');
+
+    res.send('User logged in successfully');
+  });
+});
+
+// Get Packages
+app.get('/api/packages', (req, res) => {
+  const sql = 'SELECT * FROM Packages';
+  db.query(sql, (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json(results);
+  });
+});
+
+// Payment processing
+  app.post('/api/pay', async (req, res) => {
+    const { userId, packageId, mpesaNumber } = req.body;
+
+  // Mock M-Pesa payment process
+  const paymentStatus = 'success'; // Assume payment is successful for this example
+
+  const sql = 'INSERT INTO transactions (user_id, package_id, payment_status) VALUES (?, ?, ?)';
+  db.query(sql, [userId, packageId, paymentStatus], async (err, result) => {
+    if (err) return res.status(500).send(err);
+
+    // Activate package on MikroTik router
+    await activatePackage(userId, packageId);
+
+    res.send('Payment processed and package activated');
+  });
+});
+
+// MikroTik router integration
+const activatePackage = async (userId, packageId) => {
+  // MikroTik router connection details
+  const routerIp = '192.168.56.101'; // MikroTik router IP address
+  const routerUsername = 'TRON'; // Router login username
+  const routerPassword = 'Trixogen@24'; // Router login password
+
+  const device = new MikroNode(routerIp);
+  const connection = await device.connect(routerUsername, routerPassword);
+
+  const chan = connection.openChannel();
+
+  // Define the package profiles and durations
+  const packageProfiles = {
+    1: { profile: 'quick_browsing', duration: '00:15:00' },
+    2: { profile: 'one_hour', duration: '01:00:00' },
+    3: { profile: 'one_day', duration: '24:00:00' },
+    4: { profile: 'three_days', duration: '72:00:00' },
+    5: { profile: 'one_week', duration: '168:00:00' },
+    6: { profile: 'one_month', duration: '720:00:00' }
+  };
+
+  const { profile, duration } = packageProfiles[packageId];
+
+  // Add user to the MikroTik router with the package profile and limit uptime
+  chan.write([
+    '/ip/hotspot/user/add',
+    `=name=user${userId}`,
+    `=profile=${profile}`,
+    `=limit-uptime=${duration}`
+  ]);
+
+  const [response] = await chan.read();
+  console.log(response);
+
+  connection.close();
+};
+
+// Handle all other routes with the React app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'tron_networks_frontend/build', 'index.html'));
+});
+
+app.listen(3000, () => {
+  console.log('Server running on port 3000');
+});
