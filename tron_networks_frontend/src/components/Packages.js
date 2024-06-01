@@ -31,11 +31,11 @@ const Packages = () => {
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <div className="package-grid">
         {packages.map(pkg => (
-          <div key={pkg.id} className="package-box">
-            <div className="package-title">{pkg.name}</div>
-            <div className="package-description">{pkg.description}</div>
-            <div className="package-price">KSH{pkg.price}</div>
-            <button onClick={() => handlePurchase(pkg.id)}>Purchase</button>
+          <div key={pkg.id} className="package-card">
+            <h3>{pkg.name}</h3>
+            <p>Ksh {pkg.price}</p>
+            <p>{pkg.description}</p>
+            <button onClick={() => handlePurchase(pkg.id)}>Buy Now</button>
           </div>
         ))}
       </div>
