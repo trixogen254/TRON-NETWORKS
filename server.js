@@ -10,9 +10,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors()); // Add this line to enable CORS
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'tron_networks_frontend/build')));
-
 // Database connection
 const db = mysql.createConnection({
     host: 'localhost',
@@ -66,8 +63,8 @@ app.get('/api/packages', (req, res) => {
 });
 
 // Payment processing
-  app.post('/api/pay', async (req, res) => {
-    const { userId, packageId, mpesaNumber } = req.body;
+app.post('/api/pay', async (req, res) => {
+  const { userId, packageId, mpesaNumber } = req.body;
 
   // Mock M-Pesa payment process
   const paymentStatus = 'success'; // Assume payment is successful for this example
@@ -121,11 +118,7 @@ const activatePackage = async (userId, packageId) => {
   connection.close();
 };
 
-// Handle all other routes with the React app
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'tron_networks_frontend/build', 'index.html'));
-});
-
-app.listen(3000, () => {
-  console.log('Server running on port 3000');
+// Start the server
+app.listen(3001, () => {
+  console.log('Server running on port 3001');
 });

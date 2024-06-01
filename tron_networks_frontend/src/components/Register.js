@@ -13,7 +13,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/register', { username, password, email, phone });
+      const response = await axios.post('http://localhost:3001/register', { username, password, email, phone });
       alert(response.data);
     } catch (error) {
       alert('Registration failed');
