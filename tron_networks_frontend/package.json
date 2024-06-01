@@ -1,8 +1,8 @@
 {
-  "name": "tron_networks_frontend",
+  "name": "TRON-NETWORKS",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://trixogen254.github.io/tron_networks_frontend",
+  "homepage": "https://trixogen254.github.io/TRON-NETWORKS",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
