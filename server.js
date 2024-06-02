@@ -8,8 +8,11 @@ const cors = require('cors');
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cors()); // Add this line to enable CORS
-
+app.use(cors({
+  origin: 'https://trixogen254.github.io',
+  methods: 'GET,POST,PUT,DELETE',
+  allowedHeaders: 'Content-Type,Authorization'
+}));
 // Database connection
 const db = mysql.createConnection({
     host: 'localhost',
