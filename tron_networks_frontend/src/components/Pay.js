@@ -11,8 +11,10 @@ function Pay() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const API_URL = 'https://tron-networks-ge3du7q00-trixogen254s-projects.vercel.app/';
+
     try {
-      const response = await axios.post('http://localhost:3001/api/pay', { userId, packageId, mpesaNumber });
+      const response = await axios.post('${API_URL}/api/pay', { userId, packageId, mpesaNumber });
       alert(response.data);
     } catch (error) {
       alert('Payment failed');

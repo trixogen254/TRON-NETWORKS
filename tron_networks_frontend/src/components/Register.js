@@ -11,9 +11,10 @@ function Register() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
+    const API_URL = 'https://tron-networks-ge3du7q00-trixogen254s-projects.vercel.app/';
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/register', { username, password, email, phone });
+      const response = await axios.post('`${API_URL}/register', { username, password, email, phone });
       alert(response.data);
     } catch (error) {
       alert('Registration failed');

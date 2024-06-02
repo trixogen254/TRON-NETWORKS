@@ -9,9 +9,10 @@ const Packages = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const API_URL = 'https://tron-networks-ge3du7q00-trixogen254s-projects.vercel.app/';
     const fetchPackages = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/packages');
+        const response = await axios.get(`${API_URL}/api/packages`);
         setPackages(response.data);
       } catch (error) {
         setError('Failed to fetch packages: ' + error.message);

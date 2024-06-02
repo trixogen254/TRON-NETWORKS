@@ -94,7 +94,7 @@ const activatePackage = async (userId, packageId) => {
 
   // Define the package profiles and durations
   const packageProfiles = {
-    1: { profile: 'quick_browsing', duration: '00:15:00' },
+    1: { profile: 'quick_browsing', duration: '00:05:00' },
     2: { profile: 'one_hour', duration: '01:00:00' },
     3: { profile: 'one_day', duration: '24:00:00' },
     4: { profile: 'three_days', duration: '72:00:00' },
