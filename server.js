@@ -9,7 +9,7 @@ const cors = require('cors');
 const app = express();
 app.use(bodyParser.json());
 app.use(cors({
-  origin: 'https://trixogen254.github.io',
+  origin: 'https://trixogen254.github.io/tron_networks_frontend',
   methods: 'GET,POST,PUT,DELETE',
   allowedHeaders: 'Content-Type,Authorization'
 }));
