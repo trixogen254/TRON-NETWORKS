@@ -9,21 +9,17 @@ function Register() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const navigate = useNavigate();
-  const API_URL = 'https://tron-networks-ge3du7q00-trixogen254s-projects.vercel.app/';
+  const API_URL = 'https://tron-networks-ge3du7q00-trixogen254s-projects.vercel.app'; // Base URL
 
   const handleSubmit = async (e) => {
-    
     e.preventDefault();
     try {
-      const response = await axios.post('`${API_URL}/register', { username, password, email, phone });
+      const response = await axios.post(`${API_URL}/register`, { username, password, email, phone });
       alert(response.data);
+      navigate('/login'); // Navigate to login after successful registration
     } catch (error) {
-      alert('Registration failed');
+      alert('Registration failed: ' + error.response.data);
     }
-  };
-
-  const handleLoginRedirect = () => {
-    navigate('/login');
   };
 
   return (
@@ -58,7 +54,7 @@ function Register() {
         />
         <button type="submit">Register</button>
       </form>
-      <button onClick={handleLoginRedirect}>Already have an account? Login</button>
+      <button onClick={() => navigate('/login')}>Already have an account? Login</button>
     </div>
   );
 }
