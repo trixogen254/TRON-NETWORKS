@@ -7,7 +7,7 @@ const Packages = () => {
   const [packages, setPackages] = useState([]);
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const API_URL = 'https://tron-networks-kwbvhfmdc-trixogen254s-projects.vercel.app'; // Base URL
+  const API_URL = 'https://tron-networks.vercel.app/'; // Base URL
 
   useEffect(() => {
     const fetchPackages = async () => {
