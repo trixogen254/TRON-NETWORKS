@@ -7,9 +7,10 @@ const Packages = () => {
   const [packages, setPackages] = useState([]);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const API_URL = 'https://tron-networks-ge3du7q00-trixogen254s-projects.vercel.app/';
 
   useEffect(() => {
-    const API_URL = 'https://tron-networks-ge3du7q00-trixogen254s-projects.vercel.app/';
+    
     const fetchPackages = async () => {
       try {
         const response = await axios.get(`${API_URL}/api/packages`);

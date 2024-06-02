@@ -8,11 +8,12 @@ function Pay() {
   const { packageId } = location.state || {};
   const [userId, setUserId] = useState('');
   const [mpesaNumber, setMpesaNumber] = useState('');
+  const API_URL = 'https://tron-networks-ge3du7q00-trixogen254s-projects.vercel.app/';
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const API_URL = 'https://tron-networks-ge3du7q00-trixogen254s-projects.vercel.app/';
-
+    
     try {
       const response = await axios.post('${API_URL}/api/pay', { userId, packageId, mpesaNumber });
       alert(response.data);

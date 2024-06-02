@@ -9,9 +9,10 @@ function Register() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const navigate = useNavigate();
+  const API_URL = 'https://tron-networks-ge3du7q00-trixogen254s-projects.vercel.app/';
 
   const handleSubmit = async (e) => {
-    const API_URL = 'https://tron-networks-ge3du7q00-trixogen254s-projects.vercel.app/';
+    
     e.preventDefault();
     try {
       const response = await axios.post('`${API_URL}/register', { username, password, email, phone });
