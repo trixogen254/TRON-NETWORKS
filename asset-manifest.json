@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/tron_networks_frontend/static/css/main.4e10771d.css",
-    "main.js": "/tron_networks_frontend/static/js/main.bc6f1a0c.js",
+    "main.js": "/tron_networks_frontend/static/js/main.b883243b.js",
     "index.html": "/tron_networks_frontend/index.html",
     "main.4e10771d.css.map": "/tron_networks_frontend/static/css/main.4e10771d.css.map",
-    "main.bc6f1a0c.js.map": "/tron_networks_frontend/static/js/main.bc6f1a0c.js.map"
+    "main.b883243b.js.map": "/tron_networks_frontend/static/js/main.b883243b.js.map"
   },
   "entrypoints": [
     "static/css/main.4e10771d.css",
-    "static/js/main.bc6f1a0c.js"
+    "static/js/main.b883243b.js"
   ]
 }
