@@ -9,7 +9,7 @@ function Register() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const navigate = useNavigate();
-  const API_URL = 'https://tron-networks-qyqik2hve-trixogen254s-projects.vercel.app'; // Base URL
+  const API_URL = 'https://tron-networks-trixogen254-trixogen254s-projects.vercel.app'; // Base URL
 
   const handleSubmit = async (e) => {
     e.preventDefault();
