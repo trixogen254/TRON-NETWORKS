@@ -12,7 +12,7 @@ const Packages = () => {
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/packages`);
+        const response = await axios.get(`API_URL/api/packages`);
         setPackages(response.data);
       } catch (error) {
         setError('Failed to fetch packages: ' + error.message);

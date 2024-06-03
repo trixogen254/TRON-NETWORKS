@@ -13,7 +13,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${API_URL}/login`, { username, password });
+      const response = await axios.post(`API_URL/login`, { username, password });
       alert(response.data);
       navigate('/packages');
     } catch (error) {
