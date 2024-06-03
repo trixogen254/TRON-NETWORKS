@@ -3,11 +3,11 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql2');
 const bcrypt = require('bcrypt');
 const MikroNode = require('mikronode');
-const path = require('path');
 const cors = require('cors');
 
 const app = express();
 app.use(bodyParser.json());
+
 const allowedOrigins = ['https://trixogen254.github.io/tron_networks_frontend'];
 
 app.use(cors({
@@ -19,20 +19,29 @@ app.use(cors({
     }
   }
 }));
+
+// Middleware to log requests for debugging
+app.use((req, res, next) => {
+  console.log('Request URL:', req.originalUrl);
+  console.log('Request Method:', req.method);
+  console.log('Request Headers:', req.headers);
+  next();
+});
+
 // Database connection
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'Trixogen@24',
-    database: 'tron_networks'
+  host: 'localhost',
+  user: 'root',
+  password: 'Trixogen@24',
+  database: 'tron_networks'
 });
 
 db.connect((err) => {
-    if (err) {
-        console.error('Error connecting to the database:', err);
-        return;
-    }
-    console.log('Connected to the MySQL database.');
+  if (err) {
+    console.error('Error connecting to the database:', err);
+    return;
+  }
+  console.log('Connected to the MySQL database.');
 });
 
 // User registration
@@ -53,7 +62,7 @@ app.post('/login', (req, res) => {
   db.query(sql, [username], async (err, result) => {
     if (err) return res.status(500).send(err);
     if (result.length === 0) return res.status(404).send('User not found');
-    
+
     const user = result[0];
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(401).send('Invalid credentials');
@@ -128,6 +137,7 @@ const activatePackage = async (userId, packageId) => {
 };
 
 // Start the server
-app.listen(3001, () => {
-  console.log('Server running on port 3001');
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
