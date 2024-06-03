@@ -8,10 +8,16 @@ const cors = require('cors');
 
 const app = express();
 app.use(bodyParser.json());
+const allowedOrigins = ['https://trixogen254.github.io/tron_networks_frontend'];
+
 app.use(cors({
-  origin: 'https://trixogen254.github.io/tron_networks_frontend',
-  methods: 'GET,POST,PUT,DELETE',
-  allowedHeaders: 'Content-Type,Authorization'
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
 }));
 // Database connection
 const db = mysql.createConnection({
