@@ -4,11 +4,14 @@ const mysql = require('mysql2');
 const bcrypt = require('bcrypt');
 const MikroNode = require('mikronode');
 const cors = require('cors');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
 app.use(bodyParser.json());
 
-const allowedOrigins = ['https://trixogen254.github.io'];
+const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -33,10 +36,10 @@ app.use((req, res, next) => {
 
 // Database connection
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'Trixogen@24',
-  database: 'tron_networks'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 });
 
 db.connect((err) => {
