@@ -137,6 +137,7 @@ const activatePackage = async (userId, packageId) => {
 };
 
 // Start the server
-app.listen(3000, () => {
+const API_URL = 'https://tron-networks-trixogen254-trixogen254s-projects.vercel.app';
+app.listen( API_URL, () => {
   console.log('Server running on port 3000');
 });
