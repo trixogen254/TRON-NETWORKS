@@ -12,7 +12,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`https://tron-networks-trixogen254-trixogen254s-projects.vercel.app/login`, { username, password });
+      const response = await axios.post(`http://tron-networks.vercel.app/login`, { username, password });
       alert(response.data);
       // Redirect to the packages page after successful login
       navigate('/packages');

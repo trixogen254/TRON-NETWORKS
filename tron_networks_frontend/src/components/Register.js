@@ -14,7 +14,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`https://tron-networks-trixogen254-trixogen254s-projects.vercel.app/register`, { username, password, email, phone });
+      const response = await axios.post(`http://tron-networks.vercel.app/register`, { username, password, email, phone });
       alert(response.data);
       navigate('/login'); // Navigate to login after successful registration
     } catch (error) {
