@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './App.css'; // Ensure you import the CSS
+import '../App.css';
 
 const Packages = () => {
   const [packages, setPackages] = useState([]);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const API_URL = 'https://tron-networks.vercel.app';
 
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const response = await axios.get(`http://tron-networks.vercel.app/api/packages`);
+        const response = await axios.get(`${API_URL}/api/packages`);
         setPackages(response.data);
       } catch (error) {
-        setError('Failed to fetch packages: ' + error.response.data);
+        setError('Failed to fetch packages: ' + error.message);
       }
     };
 

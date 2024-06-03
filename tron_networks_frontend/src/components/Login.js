@@ -8,16 +8,16 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const API_URL = 'https://tron-networks.vercel.app';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://tron-networks.vercel.app/login`, { username, password });
+      const response = await axios.post(`${API_URL}/login`, { username, password });
       alert(response.data);
-      // Redirect to the packages page after successful login
       navigate('/packages');
     } catch (error) {
-      setError('Invalid credentials: ' + error.response.data);
+      setError('Invalid credentials');
     }
   };
 
