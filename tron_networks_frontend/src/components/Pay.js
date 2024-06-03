@@ -8,7 +8,7 @@ function Pay() {
   const { packageId } = location.state || {};
   const [userId, setUserId] = useState('');
   const [mpesaNumber, setMpesaNumber] = useState('');
-  const API_URL = 'https://tron-networks-trixogen254-trixogen254s-projects.vercel.app';
+  const API_URL = 'https://tron-networks-6ij712yve-trixogen254s-projects.vercel.app';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
