@@ -13,6 +13,8 @@ app.use(bodyParser.json());
 
 const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
 
+console.log('Allowed Origins:', allowedOrigins);
+
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
