@@ -34,7 +34,7 @@ app.use(cors({
 app.use((req, res, next) => {
   console.log('Request URL:', req.originalUrl);
   console.log('Request Method:', req.method);
-  console.log('Request Headers:', req.headers);
+  console.log('Request Headers:', JSON.stringify(req.headers, null, 2));
   next();
 });
 
