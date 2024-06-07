@@ -8,7 +8,10 @@ const cors = require('cors');
 const app = express();
 app.use(bodyParser.json());
 
-const allowedOrigins = ['https://trixogen254.github.io'];
+const allowedOrigins = [
+  'https://trixogen254.github.io',
+  'https://trixogen254.github.io/tron_networks_frontend'
+];
 
 app.use(cors({
   origin: function (origin, callback) {
