@@ -17,9 +17,11 @@ console.log('Allowed Origins:', allowedOrigins);
 
 app.use(cors({
   origin: function (origin, callback) {
+    console.log(`CORS request from origin: ${origin}`);
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
+      console.error(`CORS error: Not allowed by CORS: ${origin}`);
       callback(new Error(`Not allowed by CORS: ${origin}`));
     }
   },
