@@ -4,25 +4,18 @@ const mysql = require('mysql2');
 const bcrypt = require('bcrypt');
 const MikroNode = require('mikronode');
 const cors = require('cors');
-const dotenv = require('dotenv');
-
-dotenv.config();
 
 const app = express();
 app.use(bodyParser.json());
 
-const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
-
-console.log('Allowed Origins:', allowedOrigins);
+const allowedOrigins = ['https://trixogen254.github.io'];
 
 app.use(cors({
   origin: function (origin, callback) {
-    console.log(`CORS request from origin: ${origin}`);
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
-      console.error(`CORS error: Not allowed by CORS: ${origin}`);
-      callback(new Error(`Not allowed by CORS: ${origin}`));
+      callback(new Error('Not allowed by CORS'));
     }
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -34,7 +27,7 @@ app.use(cors({
 app.use((req, res, next) => {
   console.log('Request URL:', req.originalUrl);
   console.log('Request Method:', req.method);
-  console.log('Request Headers:', JSON.stringify(req.headers, null, 2));
+  console.log('Request Headers:', req.headers);
   next();
 });
 
@@ -147,7 +140,6 @@ const activatePackage = async (userId, packageId) => {
 };
 
 // Start the server
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+app.listen(3000, () => {
+  console.log('Server running on port 3000');
 });
